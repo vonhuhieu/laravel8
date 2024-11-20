@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BlogList from './components/blog/blog_list/BlogList';
 import Home from './components/home/Home';
+import BlogDetail from './components/blog/blog_detail/BlogDetail';
+import Register from './components/member/Register';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,8 +15,10 @@ root.render(
   <Router>
     <App>
       <Routes>
-        <Route index element={<Home/>}/>
-        <Route path='/blog' element={<BlogList/>}/>
+        <Route index element={<Home />} />
+        <Route path='/blog' element={<BlogList />} />
+        <Route path='/blog_detail/:blog_id' element={<BlogDetail />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
     </App>
   </Router>

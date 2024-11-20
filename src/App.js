@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import './App.scss';
 import Header from './components/layout/header/Header';
 import Footer from './components/layout/footer/Footer';
-import { Routes, Route, Outlet } from 'react-router-dom';
 
 function App(props) {
   return (

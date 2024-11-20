@@ -1,6 +1,7 @@
 import LeftCategoryBrand from "../../layout/left/LeftCategoryBrand";
 import ApiBlogList from "../../../api/blog/blog_list/ApiBlogList";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BlogList = () => {
     // state
@@ -12,15 +13,17 @@ const BlogList = () => {
     }, []);
 
     // navigate
-    // redux
+    const navigate = useNavigate();
+
     // function con
+
     const fetchBlogList = async () => {
         let response = await ApiBlogList();
-        console.log(response);
         if (response && response.blog && response.blog.data) {
             setBlogList(response.blog.data);
         }
     }
+
     const renderBlog = () => {
         if (blogList && blogList.length > 0) {
             return blogList.map((value, key) => {
@@ -45,11 +48,15 @@ const BlogList = () => {
                             <img src={`/upload/Blog/Image/${value.image}`} alt="" />
                         </a>
                         <p>{value.description}</p>
-                        <a className="btn btn-primary" href="">Read More</a>
+                        <button className="btn btn-primary" onClick={() => {handleBlogDetail(value.id)}}>Read More</button>
                     </div>
                 );
             });
         }
+    };
+
+    const handleBlogDetail = (id_blog) => {
+        navigate(`/blog_detail/${id_blog}`);
     };
     return (
         <section>

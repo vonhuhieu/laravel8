@@ -18,6 +18,7 @@ const Header = (props) => {
                                     <li><a href="checkout.html"><i className="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="cart.html"><i className="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a href="login.html"><i className="fa fa-lock"></i> Login</a></li>
+                                    <li><Link to='/register'>Register</Link></li>
                                 </ul>
                             </div>
                         </div>
