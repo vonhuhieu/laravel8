@@ -1,0 +1,38 @@
+.header-top {
+    display: flex;
+    margin-top: 30px;
+    padding: 0px 200px;
+
+    .bg-body-tertiary {
+        width: 100%;
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 30px;
+        color: #d60707;
+        cursor: pointer;
+    }
+
+    .navbar-expand .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+        gap: 50px;
+
+        .navbar-text {
+            cursor: pointer;
+        }
+    }
+}
+
+.header-bottom {
+    display: flex;
+    margin-top: 30px;
+    padding: 0px 200px;
+
+    .bg-body-tertiary {
+        width: 100%;
+    }
+}
