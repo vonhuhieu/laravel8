@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const BlogList = () => {
     // state
+    const [isLoading, setIsLoading] = useState(true);
     const [blogList, setBlogList] = useState([]);
 
     // effect
@@ -21,6 +22,7 @@ const BlogList = () => {
         let response = await ApiBlogList();
         if (response && response.blog && response.blog.data) {
             setBlogList(response.blog.data);
+            setIsLoading(false);
         }
     }
 
@@ -48,7 +50,7 @@ const BlogList = () => {
                             <img src={`/upload/Blog/Image/${value.image}`} alt="" />
                         </a>
                         <p>{value.description}</p>
-                        <button className="btn btn-primary" onClick={() => {handleBlogDetail(value.id)}}>Read More</button>
+                        <button className="btn btn-primary" onClick={() => { handleBlogDetail(value.id) }}>Read More</button>
                     </div>
                 );
             });
@@ -66,7 +68,12 @@ const BlogList = () => {
                     <div className="col-sm-9">
                         <div className="blog-post-area">
                             <h2 className="title text-center">Latest From our Blog</h2>
-                            {renderBlog()}
+                            {isLoading ?
+                                <>
+                                    Data is loading...
+                                </>
+                                : renderBlog()
+                            }
                         </div>
                     </div>
                 </div>

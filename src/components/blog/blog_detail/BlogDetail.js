@@ -8,6 +8,7 @@ const BlogDetail = () => {
     const params = useParams();
 
     // State
+    const [isLoading, setIsLoading] = useState(true);
     const [blogDetail, setBlogDetail] = useState({});
 
     // Effect
@@ -22,6 +23,7 @@ const BlogDetail = () => {
         if (response && response.status === 200) {
             if (response.data) {
                 setBlogDetail(response.data);
+                setIsLoading(false);
             }
             else {
                 console.log("Không có data");
@@ -75,7 +77,13 @@ const BlogDetail = () => {
                     <LeftCategoryBrand />
                     <div className="col-sm-9">
                         <div className="blog-post-area">
-                            {renderBlogDetail()}
+                            {isLoading ?
+                                <>
+                                    Data is loading...
+                                </>
+                                :
+                                renderBlogDetail()
+                            }
                         </div>
 
                         <div className="rating-area">
