@@ -2,22 +2,19 @@ import { useEffect } from "react";
 
 const Validate = (props) => {
     // props
-    const {errors} = props;
-    
+    const { errors } = props;
+
     // effect
     useEffect(() => {
         fetchErrors();
-    },[errors]);
+    }, [errors]);
 
     // function con
     const fetchErrors = () => {
-        if(errors && Object.keys(errors).length > 0)
-        {
+        if (errors && Object.keys(errors).length > 0) {
             return Object.keys(errors).map((key, index) => {
                 return (
-                    <>
-                        <li key={`error-${index}`}>{errors[key]}</li>
-                    </>
+                    <li key={`error-${index}`}>{errors[key]}</li>
                 );
             });
         }

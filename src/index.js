@@ -20,7 +20,7 @@ root.render(
       <Router>
         <App>
           <Routes>
-            <Route index element={<Home />} />
+            <Route path='/' index element={<Home />} />
             <Route path='/blog' element={<BlogList />} />
             <Route path='/blog_detail/:blog_id' element={<BlogDetail />} />
             <Route path='/register' element={<Register />} />

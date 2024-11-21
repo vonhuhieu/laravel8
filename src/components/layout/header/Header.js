@@ -1,5 +1,23 @@
 import { useNavigate, Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import { doLogout } from "../../../redux/action/memberAction";
+
 const Header = (props) => {
+    // navigate
+    const navigate = useNavigate();
+
+    // state redux
+    const isAuthenticated = useSelector(state => state.member.isAuthenticated);
+
+    // dispatch
+    const dispatch = useDispatch();
+
+    // function con
+    const handleLogout = () => {
+        navigate('/login');
+        dispatch(doLogout());
+    };
     return (
         <header id="header">
             <div className="header-middle">
@@ -13,12 +31,22 @@ const Header = (props) => {
                         <div className="col-md-8 clearfix">
                             <div className="shop-menu clearfix pull-right">
                                 <ul className="nav navbar-nav">
-                                    <li><a href=""><i className="fa fa-user"></i> Account</a></li>
-                                    <li><a href=""><i className="fa fa-star"></i> Wishlist</a></li>
-                                    <li><a href="checkout.html"><i className="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i className="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><Link to='/login'>Login</Link></li>
-                                    <li><Link to='/register'>Register</Link></li>
+                                    {isAuthenticated ?
+                                        <>
+                                            <li><a href=""><i className="fa fa-user"></i> Account</a></li>
+                                            <li><a href=""><i className="fa fa-star"></i> Wishlist</a></li>
+                                            <li><a href="checkout.html"><i className="fa fa-crosshairs"></i> Checkout</a></li>
+                                            <li><a href="cart.html"><i className="fa fa-shopping-cart"></i> Cart</a></li>
+                                            <button onClick={() => {handleLogout()}}>Logout</button>
+                                        </>
+                                        :
+                                        <>
+                                            <li><a href="checkout.html"><i className="fa fa-crosshairs"></i> Checkout</a></li>
+                                            <li><a href="cart.html"><i className="fa fa-shopping-cart"></i> Cart</a></li>
+                                            <li><Link to='/login'>Login</Link></li>
+                                            <li><Link to='/register'>Register</Link></li>
+                                        </>
+                                    }
                                 </ul>
                             </div>
                         </div>
