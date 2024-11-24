@@ -14,6 +14,7 @@ import Login from './components/member/Login';
 import { store, persistor } from './redux/store';
 import Account from './components/account/Account';
 import UpdateAccount from './components/account/update_account/UpdateAccount';
+import MemberProductList from './components/account/member_product/MemberProductList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -29,6 +30,7 @@ root.render(
             <Route path='/login' element={<Login />} />
             <Route path='/account' element={<Account />} />
             <Route path='/account/updateAccount' element={<UpdateAccount />} />
+            <Route path='/account/myListProduct' element={<MemberProductList/>}/>
           </Routes>
         </App>
       </Router>

@@ -13,7 +13,7 @@ const LeftAccount = () => {
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title"><a href="#">My product</a></h4>
+                            <h4 class="panel-title"><Link to="/account/myListProduct">My product</Link></h4>
                         </div>
                     </div>
                 </div>

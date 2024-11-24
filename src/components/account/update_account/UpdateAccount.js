@@ -7,25 +7,6 @@ import ApiUpdateAccount from "../../../api/account/update_account/ApiUpdateAccou
 import { doUpdateAccount } from "../../../redux/action/memberAction";
 
 const UpdateAccount = () => {
-    // hook effect
-    useEffect(() => {
-        if (!_.isEmpty(account)) {
-            setInputs({
-                email: account.email,
-                name: account.name,
-                phone: account.phone,
-                address: account.address
-            });
-            if (account.avatar) {
-                setPreviewAvatar(`${baseUrl}${account.avatar}`);
-            }
-            else {
-                setPreviewAvatar("");
-            }
-            setAvatar("");
-        }
-    }, [account]);
-    
     // các biến khác
     const baseUrl = `http://127.0.0.1:8000/upload/user/avatar/`;
     // hook state
@@ -45,6 +26,25 @@ const UpdateAccount = () => {
 
     // redux action 
     const dispatch = useDispatch();
+
+    // hook effect
+    useEffect(() => {
+        if (!_.isEmpty(account)) {
+            setInputs({
+                email: account.email,
+                name: account.name,
+                phone: account.phone,
+                address: account.address
+            });
+            if (account.avatar) {
+                setPreviewAvatar(`${baseUrl}${account.avatar}`);
+            }
+            else {
+                setPreviewAvatar("");
+            }
+            setAvatar("");
+        }
+    }, [account]);
 
     // function con
     const handleInput = (event) => {
