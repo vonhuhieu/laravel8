@@ -14,8 +14,8 @@ const BlogDetailRate = () => {
     // hook state
     const [rating, setRating] = useState(0);
     const [errors, setErrors] = useState({});
-    const [announce, setAnnounce] = useState(`Average Rate: 5`);
-    const [countRate, setCountRate] = useState(0);
+    const [announce, setAnnounce] = useState(`data is loading...`);
+    const [countRate, setCountRate] = useState(`data is loading...`);
 
     // hook effect
     useEffect(() => {
@@ -54,14 +54,24 @@ const BlogDetailRate = () => {
     const fetchAverageRate = async () => {
         let response = await ApiGetAllBlogDetailRates(blog_id);
         if (response && response.response === "success") {
-            if (response.data && response.data.length > 0) {
+            // if (response.data && response.data.length > 0) {
+            //     let sum = 0;
+            //     response.data.map((value, key) => {
+            //         sum += value.rate;
+            //     });
+            //     let averageRate = Math.round(sum / response.data.length);
+            //     setAnnounce(`Average Rate: ${averageRate}`);
+            //     setCountRate(response.data.length);
+            //     setRating(averageRate);
+            // }
+            if(response.data && Object.keys(response.data).length > 0){
                 let sum = 0;
-                response.data.map((value, key) => {
-                    sum += value.rate;
+                Object.keys(response.data).map((key, index) => {
+                    sum += response.data[key]["rate"];
                 });
-                let averageRate = Math.round(sum / response.data.length);
+                let averageRate = Math.round(sum / Object.keys(response.data).length);
                 setAnnounce(`Average Rate: ${averageRate}`);
-                setCountRate(response.data.length);
+                setCountRate(Object.keys(response.data).length);
                 setRating(averageRate);
             }
             else {

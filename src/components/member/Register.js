@@ -37,7 +37,6 @@ const Register = () => {
     const handleAvatar = (event) => {
         if (event.target.files && event.target.files[0]) {
             setFile(event.target.files[0]);
-            // !_.isEmpty(updateUser)
             let reader = new FileReader();
             reader.onload = (event) => {
                 setAvatar(event.target.result);

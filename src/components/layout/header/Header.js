@@ -33,11 +33,11 @@ const Header = (props) => {
                                 <ul className="nav navbar-nav">
                                     {isAuthenticated ?
                                         <>
-                                            <li><a href=""><i className="fa fa-user"></i> Account</a></li>
+                                            <li><Link to="/account">Account</Link></li>
                                             <li><a href=""><i className="fa fa-star"></i> Wishlist</a></li>
                                             <li><a href="checkout.html"><i className="fa fa-crosshairs"></i> Checkout</a></li>
                                             <li><a href="cart.html"><i className="fa fa-shopping-cart"></i> Cart</a></li>
-                                            <button onClick={() => {handleLogout()}}>Logout</button>
+                                            <button onClick={() => { handleLogout() }}>Logout</button>
                                         </>
                                         :
                                         <>
