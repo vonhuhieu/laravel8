@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Validate from "../../../validate/Validate.js";
 import { useParams } from "react-router-dom";
 import ApiBlogDetailComment from "../../../../api/blog/blog_detail/ApiBlogDetailComment.js";
+import RealTimeBlogDetailPostReplay from "./RealTimeBlogDetailPostReplay.js";
 
 const BlogDetailPostComment = (props) => {
     // các biến khác
@@ -16,6 +17,7 @@ const BlogDetailPostComment = (props) => {
     const [comment, setComment] = useState("");
     const [errors, setErrors] = useState({});
     const [listComments, setListComments] = useState([]);
+    const [realTimeShowReplayForm, setRealTimeShowReplayForm] = useState(null);
 
     // redux state
     const isAuthenticated = useSelector(state => state?.member?.isAuthenticated);
@@ -70,25 +72,65 @@ const BlogDetailPostComment = (props) => {
     const renderComments = () => {
         if (listComments && listComments.length > 0) {
             return listComments.map((value, key) => {
-                return (
-                    <li className="media" key={`comment-${value}`}>
+                if (parseInt(value.id_comment) === 0) {
+                    const renderReplays = () => {
+                        return listComments.map((value1, key1) => {
+                            if (parseInt(value1.id_comment) === parseInt(value.id)) {
+                                return (
+                                    <li className="media second-media" key={`replay-${value1.id}`}>
+                                        <a className="pull-left" href="#">
+                                            <img style={{ width: "121px", height: "86px" }} className="media-object" src={`${baseUrl}${value1.image_user}`} alt="" />
+                                        </a>
+                                        <div className="media-body">
+                                            <ul className="sinlge-post-meta">
+                                                <li><i className="fa fa-user"></i>{value1.name_user}</li>
+                                                <li><i className="fa fa-clock-o"></i>{value1.updated_at}</li>
+                                                <li><i className="fa fa-calendar"></i>{value1.updated_at}</li>
+                                            </ul>
+                                            <p>{value1.comment}</p>
+                                        </div>
+                                    </li>
+                                );
+                            }
+                        });
+                    };
+                    return (
+                        <>
+                            <li className="media" key={`comment-${value.id}`}>
 
-                        <a className="pull-left" href="#">
-                            <img style={{ width: "121px", height: "86px" }} className="media-object" src={`${baseUrl}${value.image_user}`} alt="" />
-                        </a>
-                        <div className="media-body">
-                            <ul className="sinlge-post-meta">
-                                <li><i className="fa fa-user">{value.name_user}</i></li>
-                                <li><i className="fa fa-clock-o"></i>{value.updated_at}</li>
-                                <li><i className="fa fa-calendar"></i>{value.updated_at}</li>
-                            </ul>
-                            <p>{value.comment}</p>
-                            <button className="btn btn-primary" href=""><i className="fa fa-reply"></i>Replay</button>
-                        </div>
-                    </li>
-                );
+                                <a className="pull-left" href="#">
+                                    <img style={{ width: "121px", height: "86px" }} className="media-object" src={`${baseUrl}${value.image_user}`} alt="" />
+                                </a>
+                                <div className="media-body">
+                                    <ul className="sinlge-post-meta">
+                                        <li><i className="fa fa-user">{value.name_user}</i></li>
+                                        <li><i className="fa fa-clock-o"></i>{value.updated_at}</li>
+                                        <li><i className="fa fa-calendar"></i>{value.updated_at}</li>
+                                    </ul>
+                                    <p>{value.comment}</p>
+                                    <button className="btn btn-primary" onClick={() => { handleRealTimeShowReplayForm(value.id) }}><i className="fa fa-reply"></i>Replay</button>
+                                    {realTimeShowReplayForm === value.id &&
+                                        <RealTimeBlogDetailPostReplay
+                                            id_comment={value.id}
+                                            listComments={props.listComments}
+                                            setListComments={props.setListComments}
+                                            realTimeListComments={listComments}
+                                            setRealTimeListComments={setListComments}
+                                            realTimeShowReplayForm={realTimeShowReplayForm}
+                                            setRealTimeShowReplayForm={setRealTimeShowReplayForm}
+                                        />}
+                                </div>
+                            </li>
+                            {renderReplays()}
+                        </>
+                    );
+                }
             });
         }
+    };
+
+    const handleRealTimeShowReplayForm = (id_comment) => {
+        setRealTimeShowReplayForm((activeID) => (activeID === id_comment ? null : id_comment));
     };
 
     return (
