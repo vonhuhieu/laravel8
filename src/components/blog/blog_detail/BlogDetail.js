@@ -3,6 +3,7 @@ import LeftCategoryBrand from "../../layout/left/LeftCategoryBrand";
 import { useParams } from "react-router-dom";
 import ApiBlogDetail from "../../../api/blog/blog_detail/ApiBlogDetail";
 import BlogDetailListComment from "./blog_detail_comment/BlogDetailListComment";
+import BlogDetailRate from "./blog_detail_rate/BlogDetailRate";
 
 const BlogDetail = () => {
     // Param
@@ -88,25 +89,7 @@ const BlogDetail = () => {
                                 renderBlogDetail()
                             }
                         </div>
-                        <div className="rating-area">
-                            <ul className="ratings">
-                                <li className="rate-this">Rate this item:</li>
-                                <li>
-                                    <i className="fa fa-star color"></i>
-                                    <i className="fa fa-star color"></i>
-                                    <i className="fa fa-star color"></i>
-                                    <i className="fa fa-star"></i>
-                                    <i className="fa fa-star"></i>
-                                </li>
-                                <li className="color">(6 votes)</li>
-                            </ul>
-                            <ul className="tag">
-                                <li>TAG:</li>
-                                <li><a className="color" href="">Pink <span>/</span></a></li>
-                                <li><a className="color" href="">T-Shirt <span>/</span></a></li>
-                                <li><a className="color" href="">Girls</a></li>
-                            </ul>
-                        </div>
+                        <BlogDetailRate/>
                         <BlogDetailListComment listComments={listComments}/>
                     </div>
                 </div>

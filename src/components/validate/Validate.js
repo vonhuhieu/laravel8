@@ -14,7 +14,7 @@ const Validate = (props) => {
         if (errors && Object.keys(errors).length > 0) {
             return Object.keys(errors).map((key, index) => {
                 return (
-                    <li key={`error-${index}`}>{errors[key]}</li>
+                    <li style={{ listStyle: "none" }} key={`error-${index}`}>{errors[key]}</li>
                 );
             });
         }
